@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahz-Roblox Downloader | Premium Roblox Exploits</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #7289da;
+            --secondary: #4e5d94;
+            --accent: #ff6b6b;
+            --dark: #1a1a2e;
+            --darker: #0f0f1a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --success: #10b981;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .logo {
+            padding: 0 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo h2 {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .nav-links li {
+            margin-bottom: 10px;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--glass);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .nav-links i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(114, 137, 218, 0.3);
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(114, 137, 218, 0.5);
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 30px;
+            margin-left: 0;
+            transition: margin-left 0.4s ease;
+        }
+
+        .sidebar.active ~ .main-content {
+            margin-left: 250px;
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Welcome Page */
+        .welcome-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 0;
+            background: var(--glass);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--light);
+            margin-bottom: 10px;
+        }
+
+        /* Download Page */
+        .download-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .download-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .download-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .download-header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .download-form {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--light);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.2);
+        }
+
+        .download-card {
+            background: linear-gradient(135deg, rgba(114, 137, 218, 0.1), rgba(255, 107, 107, 0.1));
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #ff4757);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .download-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .features-list li i {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(114, 137, 218, 0.4);
+        }
+
+        .download-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(114, 137, 218, 0.6);
+        }
+
+        /* Contact Page */
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 15px;
+            color: var(--light);
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar.active ~ .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+            
+            .menu-toggle {
+                left: 20px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .download-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 20px;
+            }
+            
+            .hero-section {
+                padding: 40px 20px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .download-form {
+                padding: 25px;
+            }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatParticle 20s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(100px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <h2><i class="fas fa-robot"></i> Fahz-Roblox</h2>
+        </div>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="#welcome" class="active" onclick="showPage('welcome')">
+                    <i class="fas fa-home"></i>
+                    <span>Welcome</span>
+                </a>
+            </li>
+            <li>
+                <a href="#download" onclick="showPage('download')">
+                    <i class="fas fa-download"></i>
+                    <span>Download Exploit</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact" onclick="showPage('contact')">
+                    <i class="fas fa-headset"></i>
+                    <span>Contact Us</span>
+                </a>
+            </li>
+            <li>
+                <a href="#settings" onclick="showPage('settings')">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Menu Toggle -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Welcome Page -->
+        <div class="page active" id="welcome">
+            <div class="welcome-container">
+                <div class="hero-section">
+                    <h1>Welcome to Fahz-Roblox Downloader</h1>
+                    <p>The most advanced Roblox exploitation platform. Get premium bypassed exploits, scripts, and tools for the ultimate gaming experience.</p>
+                    <button class="download-button" onclick="showPage('download')">
+                        <i class="fas fa-rocket"></i> Get Started Now
+                    </button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="number">50K+</div>
+                        <div>Active Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-download"></i>
+                        <div class="number">200K+</div>
+                        <div>Downloads</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="number">99.9%</div>
+                        <div>Uptime & Safety</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-code"></i>
+                        <div class="number">100+</div>
+                        <div>Premium Scripts</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Download Page -->
+        <div class="page" id="download">
+            <div class="download-container">
+                <div class="download-header">
+                    <h1>New Bypassed Roblox Exploit</h1>
+                    <p>Download the latest and most advanced bypassed Roblox executor</p>
+                </div>
+                
+                <!-- Link Configuration Form -->
+                <div class="download-form">
+                    <h2 style="margin-bottom: 25px; color: var(--light);"><i class="fas fa-link"></i> Configure Download Link</h2>
+                    <div class="form-group">
+                        <label for="downloadLink"><i class="fas fa-globe"></i> Download Link URL:</label>
+                        <input type="url" id="downloadLink" placeholder="https://www.mediafire.com/file/mk3medj9ksq2klp/DeltaXFahz-2.701.966-02.apk/file">
+                    </div>
+                    <div class="form-group">
+                        <label for="exploitName"><i class="fas fa-tag"></i> Exploit Name:</label>
+                        <input type="text" id="exploitName" placeholder="e.g., FahzXDelta Executor v70.11">
+                    </div>
+                    <div class="form-group">
+                        <label for="version"><i class="fas fa-code-branch"></i> Version:</label>
+                        <input type="text" id="version" placeholder="e.g., v70.11 Bypassed">
+                    </div>
+                    <button class="download-button" onclick="updateDownloadCard()" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-sync"></i> Update Download Card
+                    </button>
+                </div>
+                
+                <!-- Download Card -->
+                <div class="download-card" id="downloadCard">
+                    <div class="version-badge" id="versionBadge">v70.11 BYPASSED</div>
+                    <h1 class="download-title" id="exploitTitle">Fahz Executor Premium</h1>
+                    <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">
+                        Advanced bypassed Roblox executor with 100% detection evasion
+                    </p>
+                    
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> Full Roblox Bypass Protection</li>
+                        <li><i class="fas fa-check-circle"></i> Multi-Script Execution</li>
+                        <li><i class="fas fa-check-circle"></i> Auto-Inject Feature</li>
+                        <li><i class="fas fa-check-circle"></i> Built-in Script Hub</li>
+                        <li><i class="fas fa-check-circle"></i> Regular Updates</li>
+                    </ul>
+                    
+                    <a href="#" class="download-button" id="downloadButton" target="_blank">
+                        <i class="fas fa-download"></i> Download Now
+                    </a>
+                    
+                    <div style="margin-top: 30px; color: #94a3b8; font-size: 0.9rem;">
+                        <i class="fas fa-shield-alt"></i> 100% Safe | No Virus | Undetectable
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Page -->
+        <div class="page" id="contact">
+            <div class="contact-container">
+                <div class="download-header">
+                    <h1>Contact Us</h1>
+                    <p>Get in touch with our support team for any questions or issues</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h3>WhatsApp Support</h3>
+                            <p>24/7 Customer Support via WhatsApp</p>
+                            <div style="background: rgba(37, 211, 102, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                                <strong style="color: #25D366;">+62 882-0077-77906</strong>
+                            </div>
+                            <a href="https://wa.me/62882007777906" class="contact-button" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Chat Now
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h3>Email Support</h3>
+                            <p>Send us an email for business inquiries</p>
+                            <div style="background: rgba(114, 137, 218, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                                <strong style="color: var(--primary);">helpeltz@gmail.com</strong>
+                            </div>
+                            <a href="mailto:helpeltz@gmail.com" class="contact-button">
+                                <i class="fas fa-paper-plane"></i> Send Email
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h3>Live Support</h3>
+                            <p>Join our community for quick help</p>
+                            <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                                <strong style="color: var(--accent);">Telegram: @FahzSupport</strong>
+                            </div>
+                            <a href="#" class="contact-button">
+                                <i class="fab fa-telegram"></i> Join Telegram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Page -->
+        <div class="page" id="settings">
+            <div class="download-container">
+                <div class="download-header">
+                    <h1><i class="fas fa-cog"></i> Settings</h1>
+                    <p>Customize your downloader experience</p>
+                </div>
+                
+                <div class="download-form">
+                    <h2 style="margin-bottom: 25px; color: var(--light);"><i class="fas fa-palette"></i> Theme Settings</h2>
+                    
+                    <div class="form-group">
+                        <label for="themeColor"><i class="fas fa-fill-drip"></i> Primary Color:</label>
+                        <input type="color" id="themeColor" value="#7289da" style="width: 100%; height: 60px; cursor: pointer;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bgAnimation"><i class="fas fa-play-circle"></i> Background Animation:</label>
+                        <select id="bgAnimation" style="width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.1); border-radius: 10px; color: white;">
+                            <option value="particles">Floating Particles</option>
+                            <option value="matrix">Matrix Rain</option>
+                            <option value="grid">Cyber Grid</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                    
+                    <button class="download-button" onclick="applySettings()" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-check"></i> Apply Settings
+                    </button>
+                </div>
+                
+                <div class="download-card" style="margin-top: 40px;">
+                    <h2 style="margin-bottom: 20px;"><i class="fas fa-info-circle"></i> About Fahz-Roblox</h2>
+                    <p style="color: #cbd5e1; line-height: 1.8; margin-bottom: 20px;">
+                        Fahz-Roblox Downloader is a premium platform for Roblox exploitation tools. 
+                        We provide the latest bypassed executors, scripts, and utilities for enhanced gaming experience.
+                    </p>
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                        <button class="contact-button" onclick="showPage('welcome')">
+                            <i class="fas fa-home"></i> Back to Home
+                        </button>
+                        <button class="contact-button" onclick="resetSettings()" style="background: rgba(255,107,107,0.2);">
+                            <i class="fas fa-redo"></i> Reset All
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 FahzXDelta-Roblox Downloader. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-shield-alt"></i> This tool is for free and obtainable.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ===================== INITIALIZATION =====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles
+            createParticles();
+            
+            // Load saved settings
+            loadSettings();
+            
+            // Set default download link
+            document.getElementById('downloadLink').value = 'https://www.mediafire.com/file/mk3medj9ksq2klp/DeltaXFahz-2.701.966-02.apk/file';
+            document.getElementById('exploitName').value = 'FahzXDelta Executor v70.11';
+            document.getElementById('version').value = 'v70.11 Bypassed';
+            
+            // Initialize download card
+            updateDownloadCard();
+        });
+        
+        // ===================== SIDEBAR TOGGLE =====================
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 992) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            }
+        });
+        
+        // ===================== PAGE NAVIGATION =====================
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${pageId}`) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close sidebar on mobile
+            if (window.innerWidth <= 992) {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        }
+        
+        // ===================== DOWNLOAD LINK SYSTEM =====================
+        function updateDownloadCard() {
+            const downloadLink = document.getElementById('downloadLink').value;
+            const exploitName = document.getElementById('exploitName').value;
+            const version = document.getElementById('version').value;
+            
+            // Update download card
+            document.getElementById('versionBadge').textContent = version.toUpperCase();
+            document.getElementById('exploitTitle').textContent = exploitName;
+            
+            // Update download button
+            const downloadButton = document.getElementById('downloadButton');
+            downloadButton.href = downloadLink;
+            
+            // Save to localStorage
+            localStorage.setItem('downloadLink', downloadLink);
+            localStorage.setItem('exploitName', exploitName);
+            localStorage.setItem('version', version);
+            
+            // Show success message
+            showNotification('Download card updated successfully!', 'success');
+        }
+        
+        // ===================== PARTICLE BACKGROUND =====================
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.3 + 0.1;
+                
+                // Apply styles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.opacity = opacity;
+                particle.style.background = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // ===================== SETTINGS SYSTEM =====================
+        function loadSettings() {
+            const savedColor = localStorage.getItem('themeColor');
+            const savedAnimation = localStorage.getItem('bgAnimation');
+            
+            if (savedColor) {
+                document.getElementById('themeColor').value = savedColor;
+                applyThemeColor(savedColor);
+            }
+            
+            if (savedAnimation) {
+                document.getElementById('bgAnimation').value = savedAnimation;
+                applyBackgroundAnimation(savedAnimation);
+            }
+        }
+        
+        function applySettings() {
+            const color = document.getElementById('themeColor').value;
+            const animation = document.getElementById('bgAnimation').value;
+            
+            // Apply theme color
+            applyThemeColor(color);
+            
+            // Apply background animation
+            applyBackgroundAnimation(animation);
+            
+            // Save to localStorage
+            localStorage.setItem('themeColor', color);
+            localStorage.setItem('bgAnimation', animation);
+            
+            showNotification('Settings applied successfully!', 'success');
+        }
+        
+        function applyThemeColor(color) {
+            document.documentElement.style.setProperty('--primary', color);
+            
+            // Calculate secondary color (darker version)
+            const darkerColor = adjustColor(color, -30);
+            document.documentElement.style.setProperty('--secondary', darkerColor);
+            
+            // Recreate particles with new color
+            createParticles();
+        }
+        
+        function applyBackgroundAnimation(animation) {
+            const particles = document.getElementById('particles');
+            
+            switch(animation) {
+                case 'particles':
+                    particles.style.display = 'block';
+                    break;
+                case 'matrix':
+                    // Would implement matrix rain here
+                    particles.style.display = 'block';
+                    break;
+                case 'none':
+                    particles.style.display = 'none';
+                    break;
+            }
+        }
+        
+        function resetSettings() {
+            localStorage.removeItem('themeColor');
+            localStorage.removeItem('bgAnimation');
+            localStorage.removeItem('downloadLink');
+            localStorage.removeItem('exploitName');
+            localStorage.removeItem('version');
+            
+            document.getElementById('themeColor').value = '#7289da';
+            document.getElementById('bgAnimation').value = 'particles';
+            
+            document.getElementById('downloadLink').value = 'https://your-download-link-here.com/executor.zip';
+            document.getElementById('exploitName').value = 'Fahz Executor v5.0';
+            document.getElementById('version').value = 'v5.0 Bypassed';
+            
+            updateDownloadCard();
+            applySettings();
+            
+            showNotification('All settings have been reset!', 'success');
+        }
+        
+        // Helper function to adjust color brightness
+        function adjustColor(color, amount) {
+            let usePound = false;
+            
+            if (color[0] === "#") {
+                color = color.slice(1);
+                usePound = true;
+            }
+            
+            const num = parseInt(color, 16);
+            let r = (num >> 16) + amount;
+            let g = ((num >> 8) & 0x00FF) + amount;
+            let b = (num & 0x0000FF) + amount;
+            
+            r = Math.min(Math.max(0, r), 255);
+            g = Math.min(Math.max(0, g), 255);
+            b = Math.min(Math.max(0, b), 255);
+            
+            return (usePound ? "#" : "") + (b | (g << 8) | (r << 16)).toString(16).padStart(6, '0');
+        }
+        
+        // ===================== NOTIFICATION SYSTEM =====================
+        function showNotification(message, type) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            // Style notification
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 30px;
+                background: ${type === 'success' ? 'rgba(16, 185, 129, 0.9)' : 'rgba(239, 68, 68, 0.9)'};
+                color: white;
+                padding: 20px 30px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                z-index: 9999;
+                animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255,255,255,0.2);
+            `;
+            
+            // Add to document
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+            
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // ===================== KEYBOARD SHORTCUTS =====================
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + S to save download settings
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                updateDownloadCard();
+            }
+            
+            // Esc to close sidebar
+            if (e.key === 'Escape') {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+            
+            // Number keys for navigation
+            if (e.key === '1') showPage('welcome');
+            if (e.key === '2') showPage('download');
+            if (e.key === '3') showPage('contact');
+            if (e.key === '4') showPage('settings');
+        });
+        
+        // ===================== AUTO-SAVE FEATURE =====================
+        let saveTimeout;
+        const inputs = ['downloadLink', 'exploitName', 'version'];
+        
+        inputs.forEach(inputId => {
+            const input = document.getElementById(inputId);
+            input.addEventListener('input', function() {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(updateDownloadCard, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
